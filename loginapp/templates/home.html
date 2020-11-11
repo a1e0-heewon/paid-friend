@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIN</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "/css/header.css" %}">
+    <link rel="stylesheet" href="{% static "/css/index.css" %}">
+</head>
+<body>
+    <header>    
+        <div class="header-main">
+            <a href="{% url "home" %}">
+                <img class="logo" src="{% static "img/logo.png" %}" alt="logo">
+            </a>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{% url "ulist" %}"><strong>LIST</strong></a></li>
+                    <li><a href="{% url "login" %}" id="logina"><strong id="headerlogin">LOGIN</strong></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <p hidden id="islogin">{{ request.session.islogin }}</p>
+    <script>
+        var headerlogin = document.getElementById("headerlogin");
+        var islogin = document.getElementById("islogin").innerText;
+        console.log(islogin);
+        if(islogin){
+            headerlogin.innerHTML = "LOGOUT";
+            document.getElementById('logina').href = "{% url "logout" %}";
+        }
+    </script>
+    <div class="contents">
+        <h1 style="color: white; text-align: center; margin: 400px 20px 0 20px; opacity: 0.7;"><strong>이 친구는 유료입니다.</strong></h1>
+    </div>
+    <div id="naruto">
+        <section class="head"></section>
+        <section class="torso"></section>
+        <section class="legs"></section>
+        <section class="shadow"></section>
+    </div>
+</body>
+</html>

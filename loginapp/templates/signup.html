@@ -1,0 +1,91 @@
+{% block content %}
+
+<!-- <a href="{% url 'signup' %}" method = 'POST' > 회원가입</a><br>
+<a href="{% url 'ulist' %}"method = 'GET'>ulist</a> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIN</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "/css/header.css" %}">
+    <link rel="stylesheet" href="{% static "/css/index.css" %}">
+    <link rel="stylesheet" href="{% static "/css/login.css" %}">
+</head>
+<body>
+    <header>    
+        <div class="header-main">
+            <a href="{% url "home" %}">
+                <img class="logo" src="{% static "img/logo.png" %}" alt="logo">
+            </a>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{% url "ulist" %}"><strong>LIST</strong></a></li>
+                    <li><a href="{% url "login" %}" id="logina"><strong id="headerlogin">LOGIN</strong></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <p hidden id="islogin">{{ request.session.islogin }}</p>
+    <script>
+        var headerlogin = document.getElementById("headerlogin");
+        var islogin = document.getElementById("islogin").innerText;
+        console.log(islogin);
+        if(islogin){
+            headerlogin.innerHTML = "LOGOUT";
+            document.getElementById('logina').href = "{% url "logout" %}";
+        }
+    </script>
+    <div class="bmain">
+        <div class="login">
+            SignUp
+        </div>
+        <form id="login-form" method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="legend">Username</label><br>
+            <input class="loginin" type="text" name="username" placeholder="이름" required autofocus><br>
+            <label class="legend">ID</label><br>
+            <input class="loginin" type="text" name="yourid" placeholder="아이디" required autofocus><br>
+            <label class="legend">Password</label><br>
+            <input class="loginin" type="password" name="password1" placeholder="비밀번호" required><br>
+            <label class="legend">Confirm Password</label><br>
+            <input class="loginin" type="password" name="password2" placeholder="비밀번호 확인" required><br>
+            <label class="legend">School</label><br>
+            <input class="loginin" type="text" name="school" placeholder="학교" required><br>
+            <label class="legend">Gender</label><br>
+            <input class="gender" type="radio" name="gender" value="female">여자
+            <input class="genders" type="radio" name="gender" value="male">남자<br>
+            <label class="legend">Birthday</label><br>
+            <input class="loginin" type="date" name="birth" required><br>
+            <label class="legend">Hobby</label><br>
+            <input class="loginin" type="text" name="hobby" placeholder="취미" required><br>
+            <label class="legend">MBTI</label><br>
+            <input class="loginin" type="text" name="mbti" placeholder="MBTI" required><br>
+            <label class="legend">kakao</label><br>
+            <input class="loginin" type="text" name="kakao" placeholder="kakao" required><br>
+            <label class="legend">Image</label><br>
+            <input type="file" name = "img" id="image" accept="image/*" onchange="setThumbnail(event);"/> 
+            <div id="image_container"></div>
+            <script> function setThumbnail(event) { 
+                var reader = new FileReader(); 
+                reader.onload = function(event) 
+                { var img = document.createElement("img"); 
+                img.setAttribute("src", event.target.result); 
+                document.querySelector("div#image_container").appendChild(img); 
+                }; 
+                reader.readAsDataURL(event.target.files[0]); }
+            </script>
+            <input class="loginbu" type="submit" value="SignUp">
+            {% if message %}
+            <script>
+                alert("이미 아이디가 존재합니다.")
+            </script>
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,32 @@
+/* login */
+.bmain { color: white; padding: 100px}
+.login { margin: 150px 0 0 50px; font-size: 50px; font-weight: bolder;}
+#login-form{
+    display: block;
+    width: 35%;
+    margin: 100px 50px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.loginin {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0 25px 0;
+    border: 3px solid #ccc;
+    box-sizing: border-box;
+}
+.loginbu {
+    width: 20%;
+    padding: 10px 20px;
+    margin: 0px 0px 0px 25px;
+    float: right;
+    border: 3px solid #ccc;
+    box-sizing: border-box;
+}
+.gender {
+    margin: 8px 8px 25px 0px;
+}
+.genders {
+    margin: 8px 8px 25px 30px;
+}

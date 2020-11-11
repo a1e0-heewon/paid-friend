@@ -1,0 +1,55 @@
+.container {
+    height: 100%;
+    margin: 85px 10px 10px 10px;
+    padding: 20px 20px 20px 20px;
+}
+.card {
+    background-color: #ebf7fe;
+    width: 70%;
+    height: 500px;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 20px auto;
+    padding: 35px;
+}
+
+#img {
+    
+}
+
+.name {
+    margin-top: 25px;
+    font-size: 200%;    
+}
+
+.school {
+    margin-bottom: 35px;
+}
+
+.con {
+    margin-bottom: 15px;
+}
+
+.img {
+    float: left;
+}
+
+.content {
+    margin-left: 50px;
+    float: left;
+}
+
+.loginin {
+    width: 88%;
+    padding: 12px 20px;
+    border: 3px solid #ccc;
+    box-sizing: border-box;
+}
+.loginbu {
+    width: 10%;
+    padding: 12px 20px;
+    margin: 0px 0px 0px 25px;
+    float: right;
+    border: 3px solid #ccc;
+    box-sizing: border-box;
+}

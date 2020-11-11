@@ -1,0 +1,70 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIN</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "/css/header.css" %}">
+    <link rel="stylesheet" href="{% static "/css/index.css" %}">
+</head>
+<body>
+    <header>    
+        <div class="header-main">
+            <a href="{% url "home" %}">
+                <img class="logo" src="{% static "img/logo.png" %}" alt="logo">
+            </a>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{% url "ulist" %}"><strong>LIST</strong></a></li>
+                    <li><a href="{% url "login" %}" id="logina"><strong id="headerlogin">LOGIN</strong></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <p hidden id="islogin">{{ request.session.islogin }}</p>
+    <script>
+        var headerlogin = document.getElementById("headerlogin");
+        var islogin = document.getElementById("islogin").innerText;
+        console.log(islogin);
+        if(islogin){
+            headerlogin.innerHTML = "LOGOUT";
+            document.getElementById('logina').href = "{% url "logout" %}";
+        }
+    </script>
+    <div>
+        <link rel="stylesheet" href="{% static "css/list.css" %}">
+        <div class="container">
+            <form action="{% url 'search' %}" method="post">
+                {% csrf_token %}
+                <input class="loginin" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
+                <button class="loginbu" type="submit">Search</button>
+            </form>
+            {% if not aaa %}
+                <h1 style="color: white;">검색 결과가 없습니다</h1>
+            {% else %}
+                {% for school in aaa.all %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="img">
+                                <img src="/media/{{ school.img }}" width="500" height="500">
+                            </div>
+                            <div class="content">
+                                <h1><p class="name"><strong>{{ school.name }}</strong></p></h1>
+                                <h3><p class="school">{{ school.school }}</p></h3>
+                                <p class="con">성별: {{ school.gender }}</p>
+                                <p class="con">생년월일: {{ school.birth }}</p>
+                                <p class="con">취미: {{ school.hobby }}</p>
+                                <p class="con">MBTI: {{ school.mbti }}</p>
+                                <p class="con">카카오톡ID: {{ school.kakao }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
